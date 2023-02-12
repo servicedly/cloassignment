@@ -23,15 +23,16 @@ jobs:
         AWS_REGION: us-east-1
 
     - name: Build and push images to Amazon ECR
-      env:
+       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: assignment1-dev
         TAG_APP_Manish: v0-app
         TAG_DB_Manish: v0-db
-   
+
       run: |
         cd application/app/
         docker build -t $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_APP_Manish} -f Dockerfile .
-        cd ../
+        cd ../db/
         docker build -t $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_DB_Manish} -f init.sql .
+        docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_DB_ManishB}
         docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_APP_Manish}
