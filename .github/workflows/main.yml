@@ -33,5 +33,5 @@ jobs:
         cd application/app/
         docker build -t $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_APP_Manish} -f Dockerfile .
         cd ../
-        docker build -t $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_DB_Manish} -f init111.sql .
+        docker build -t $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_DB_Manish} -f init.sql 
         docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_APP_Manish}
