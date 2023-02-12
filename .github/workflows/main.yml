@@ -30,9 +30,9 @@ jobs:
         TAG_DB_Manish: v0-db
 
       run: |
-        cd app/
+        cd ~/environment/cloassignment/application/app/
         docker build -t $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_APP_Manish} -f Dockerfile .
-        cd ../db/
+        cd ~/environment/cloassignment/application/db/
         docker build -t $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_DB_Manish} -f init.sql .
         docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_DB_ManishB}
         docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_APP_Manish}
