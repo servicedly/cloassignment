@@ -29,6 +29,6 @@ jobs:
         TAG_APP_Manish: v0-app
       
       run: |
-        cd application/app/
+        cd application
         docker build -t $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_APP_Manish} -f Dockerfile .
         docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_APP_Manish}
