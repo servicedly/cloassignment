@@ -27,6 +27,7 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: assignment1-dev
         TAG_APP_Manish: v0-app
+        TAG_DB_Manish:  v0-db
         
 
       run: |
