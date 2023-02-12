@@ -23,7 +23,7 @@ jobs:
         AWS_REGION: us-east-1
 
     - name: Build and push images to Amazon ECR
-     env:
+       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: assignment1-dev
         TAG_APP_Manish: v0-app
