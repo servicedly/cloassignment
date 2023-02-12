@@ -33,6 +33,7 @@ jobs:
       run: |
         cd application/app/
         docker build -t $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_APP_Manish} -f Dockerfile .
-        cd ../db/
-        docker build -t $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_DB_Manish} -f init.sql .
+        cd ../
+        docker build -t $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_DB_Manish} -f docker-compose.yml . 
         docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_APP_Manish}
+        docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_DB_Manish}
