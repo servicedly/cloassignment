@@ -25,12 +25,14 @@ jobs:
     - name: Build and push images to Amazon ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: 
-        IMAGE_TAG_APP: app.v0.1
-        IMAGE_TAG_DB: db.v0.1
+        ECR_REPOSITORY: assignment1-dev
+        TAG_APP_Manish: v0-app
+        TAG_DB_Manish: v0-db
 
       run: |
-        docker build -t $ECR_REGISTRY/${ECR_REPOSITORY}:${IMAGE_TAG_DB} -f Dockerfile_mysql .
-        docker build -t $ECR_REGISTRY/${ECR_REPOSITORY}:${IMAGE_TAG_APP} -f Dockerfile .
-        docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${IMAGE_TAG_DB}
-        docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${IMAGE_TAG_APP}
+        cd app/
+        docker build -t $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_APP_Manish} -f Dockerfile .
+        cd ../db/
+        docker build -t $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_DB_Manish} -f init.sql .
+        docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_DB_ManishB}
+        docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_APP_Manish}
