@@ -28,10 +28,13 @@ jobs:
         ECR_REPOSITORY: assignment1-dev
         TAG_APP_Manish: v0-app
         TAG_DB_Manish:  v0-db
-        
+      
 
       run: |
         cd application/app/
         docker build -t $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_APP_Manish} -f Dockerfile .
         docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_APP_Manish}
+        cd ../db
+        docker build -t $ECR_REGISTRY/${ECR_REPOSITORY}:${IMAGE_TAG_DB} -f Dockerfile_mysql .
+        docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${TAG_DB_Manish}
         
