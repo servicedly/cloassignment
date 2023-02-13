@@ -10,4 +10,6 @@ INSERT INTO favorite_colors
   (name, color)
 VALUES
   ('Lancelot', 'blue'),
+  ('David', 'black'),
+  ('Alina', 'pink'),
   ('Galahad', 'yellow');
