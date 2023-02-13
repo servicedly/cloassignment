@@ -36,6 +36,6 @@ jobs:
         docker build -t $ECR_REGISTRY/${APP_ECR_REPOSITORY}:${TAG_APP_Manish} -f Dockerfile .
         docker push $ECR_REGISTRY/${APP_ECR_REPOSITORY}:${TAG_APP_Manish}
         cd ../db
-        docker build -t $ECR_REGISTRY/${DB_ECR_REPOSITORY}:${IMAGE_TAG_DB} -f Dockerfile_mysql .
+        docker build -t $ECR_REGISTRY/${DB_ECR_REPOSITORY}:${TAG_DB_Manish} -f Dockerfile_mysql .
         docker push $ECR_REGISTRY/${DB_ECR_REPOSITORY}:${TAG_DB_Manish}
         
