@@ -44,6 +44,8 @@ resource "aws_instance" "my_amazon" {
   vpc_security_group_ids      = [aws_security_group.my_sg.id]
   associate_public_ip_address = true
   iam_instance_profile        = "LabInstanceProfile"
+  user_data                   = file("${path.module}/user_data.sh")
+  
 
   lifecycle {
     create_before_destroy = true
@@ -85,7 +87,7 @@ resource "aws_security_group" "my_sg" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
-   ingress {
+  ingress {
     description      = "Custom port 1 from everywhere"
     from_port        = 5001
     to_port          = 5001
@@ -93,7 +95,7 @@ resource "aws_security_group" "my_sg" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
-   ingress {
+  ingress {
     description      = "Custom port 2 from everywhere"
     from_port        = 5002
     to_port          = 5002
@@ -127,9 +129,18 @@ resource "aws_eip" "static_eip" {
 }
 
 resource "aws_ecr_repository" "ecr" {
-  name                 = local.name_prefix
-  image_tag_mutability = var.image_mutability
-  force_delete = true
+  name                 = "appecr"
+  #force_delete         = true
+  encryption_configuration {
+    encryption_type = var.encrypt_type
+  }
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+}
+resource "aws_ecr_repository" "db" {
+  name                 = "dbecr"
+  #force_delete         = true
   encryption_configuration {
     encryption_type = var.encrypt_type
   }
