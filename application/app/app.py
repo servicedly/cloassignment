@@ -10,7 +10,7 @@ def favorite_colors() -> List[Dict]:
     config = {
         'user': 'root',
         'password': 'root',
-        'host': 'db',
+        'host': 'mysql-db',
         'port': '3306',
         'database': 'knights'
     }
@@ -30,4 +30,4 @@ def index() -> str:
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=5000, debug=True)
