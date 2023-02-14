@@ -14,13 +14,16 @@ def favorite_colors() -> List[Dict]:
         'port': '3306',
         'database': 'knights'
     }
-    connection = mysql.connector.connect(**config)
-    cursor = connection.cursor()
-    cursor.execute('SELECT * FROM favorite_colors')
-    results = [{name: color} for (name, color) in cursor]
-    cursor.close()
-    connection.close()
-
+    try:
+        connection = mysql.connector.connect(**config)
+        cursor = connection.cursor()
+        cursor.execute('SELECT * FROM favorite_colors')
+        results = [{name: color} for (name, color) in cursor]
+        cursor.close()
+        connection.close()
+    except Exception as e:
+        return("Exception occured as ",e)
+    print(results)
     return results
 
 
