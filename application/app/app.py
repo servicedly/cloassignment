@@ -10,17 +10,20 @@ def favorite_colors() -> List[Dict]:
     config = {
         'user': 'root',
         'password': 'root',
-        'host': 'db',
+        'host': 'mysql-db',
         'port': '3306',
         'database': 'knights'
     }
-    connection = mysql.connector.connect(**config)
-    cursor = connection.cursor()
-    cursor.execute('SELECT * FROM favorite_colors')
-    results = [{name: color} for (name, color) in cursor]
-    cursor.close()
-    connection.close()
-
+    try:
+        connection = mysql.connector.connect(**config)
+        cursor = connection.cursor()
+        cursor.execute('SELECT * FROM favorite_colors')
+        results = [{name: color} for (name, color) in cursor]
+        cursor.close()
+        connection.close()
+    except Exception as e:
+        return("Exception occured as ",e)
+    print(results)
     return results
 
 
@@ -30,4 +33,4 @@ def index() -> str:
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=8080, debug=True)
